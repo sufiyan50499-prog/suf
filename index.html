@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A1 Car Detailing Factory - Owner Dashboard</title>
+
+    <link rel="stylesheet" href="owner-dashboard.css">
+
+    <!-- OWNER LOGIN GUARD -->
+    <script>
+        (function () {
+            const ownerLoggedIn =
+                sessionStorage.getItem("ownerLoggedIn");
+
+            if (ownerLoggedIn !== "true") {
+                window.location.replace("owner-login.html");
+            }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>A1 CAR</h2>
+            <p>DETAILING FACTORY</p>
+            <span>OWNER PANEL</span>
+        </div>
+
+        <nav>
+
+            <a href="owner-dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="add-vehicle.html">
+                Add Vehicle
+            </a>
+
+            <a href="vehicle-records.html">
+                Vehicle Records
+            </a>
+
+            <a href="active-vehicles.html">
+                Active Vehicles
+            </a>
+
+            <a href="completed-vehicles.html">
+                Completed Vehicles
+            </a>
+
+            <a href="revenue.html">
+                Revenue
+            </a>
+
+            <a href="reports.html">
+                Reports
+            </a>
+
+            <a href="staff-management.html" id="staffManagementLink">
+                Staff Management
+            </a>
+
+        </nav>
+
+        <!-- LOGOUT -->
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            type="button">
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Owner Dashboard
+                </h1>
+
+                <p>
+                    A1 Car Detailing Factory
+                </p>
+
+            </div>
+
+            <div class="owner-badge">
+                Owner
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section class="stats">
+
+            <!-- TOTAL -->
+
+            <div
+                class="stat-card"
+                id="totalVehiclesCard">
+
+                <div>
+                    <span>
+                        Total Vehicles
+                    </span>
+
+                    <strong id="totalVehicles">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE -->
+
+            <div
+                class="stat-card clickable-card"
+                id="activeVehiclesCard"
+                role="button"
+                tabindex="0"
+                title="Open Vehicles Inside">
+
+                <div>
+                    <span>
+                        Vehicles Inside
+                    </span>
+
+                    <strong id="activeVehicles">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- COMPLETED -->
+
+            <div
+                class="stat-card clickable-card"
+                id="completedVehiclesCard"
+                role="button"
+                tabindex="0"
+                title="Open Completed Vehicles">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedVehicles">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- REVENUE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Revenue
+                    </span>
+
+                    <strong id="todayRevenue">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VEHICLES INSIDE
+             ================================================= -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Vehicles Inside Showroom
+                    </h2>
+
+                    <p>
+                        Currently active vehicles
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <a
+                        href="active-vehicles.html"
+                        class="secondary-btn">
+
+                        View All
+
+                    </a>
+
+
+                    <a
+                        href="add-vehicle.html"
+                        class="primary-btn">
+
+                        + Add Vehicle
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+
+                            <th>
+                                Vehicle Number
+                            </th>
+
+                            <th>
+                                Owner
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Vehicle
+                            </th>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Entry Time
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Balance
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="activeVehicleTable">
+
+                        <tr>
+
+                            <td
+                                colspan="10"
+                                class="loading">
+
+                                Loading vehicles from Google Sheets...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENTLY COMPLETED
+             ================================================= -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Recently Completed
+                    </h2>
+
+                    <p>
+                        Latest completed vehicles
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <a
+                        href="completed-vehicles.html"
+                        class="secondary-btn">
+
+                        View All
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+
+                            <th>
+                                Vehicle Number
+                            </th>
+
+                            <th>
+                                Owner
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Vehicle
+                            </th>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Paid
+                            </th>
+
+                            <th>
+                                Balance
+                            </th>
+
+                            <th>
+                                Payment
+                            </th>
+
+                            <th>
+                                Exit Time
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="completedVehicleTable">
+
+                        <tr>
+
+                            <td
+                                colspan="12"
+                                class="loading">
+
+                                Loading completed vehicles...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer>
+
+            Powered by Abu Sufiyan M © 2026
+
+        </footer>
+
+    </main>
+
+
+    <!-- =====================================================
+         DASHBOARD JAVASCRIPT
+         ===================================================== -->
+
+    <script src="owner-dashboard.js"></script>
+
+</body>
+
+</html>
+

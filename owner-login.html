@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>A1 Car Detailing Factory - Owner Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #1e293b,
+                    #020617 65%
+                );
+            color: #ffffff;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 18px;
+            padding: 35px 30px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .brand p {
+            color: #94a3b8;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .owner-label {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: #1e293b;
+            color: #38bdf8;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            background: #020617;
+            color: #ffffff;
+            outline: none;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #38bdf8;
+            box-shadow:
+                0 0 0 3px rgba(56, 189, 248, 0.12);
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 75px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #38bdf8;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .show-password:hover {
+            color: #7dd3fc;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #0369a1;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .error-message,
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid #166534;
+            color: #86efac;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            color: #38bdf8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 30px 22px;
+            }
+
+            .brand h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="brand">
+            <h1>A1 CAR</h1>
+
+            <p>DETAILING FACTORY</p>
+
+            <span class="owner-label">
+                OWNER LOGIN
+            </span>
+        </div>
+
+        <form id="ownerLoginForm">
+
+            <div class="form-group">
+
+                <label for="username">
+                    Owner Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter owner username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter owner password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        id="showPasswordBtn"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
+                Login to Owner Dashboard
+            </button>
+
+        </form>
+
+        <div
+            id="errorMessage"
+            class="error-message"
+        ></div>
+
+        <div
+            id="successMessage"
+            class="success-message"
+        >
+            Login successful.
+            Opening owner dashboard...
+        </div>
+
+        <a
+            href="login.html"
+            class="back-link"
+        >
+            ← Back to Main Login
+        </a>
+
+    </div>
+
+    <div class="footer">
+        Powered by Abu Sufiyan M © 2026
+    </div>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   A1 CAR DETAILING FACTORY
+   OWNER LOGIN
+   GOOGLE SHEETS CONNECTED VERSION
+   ============================================================ */
+
+
+/* ============================================================
+   GOOGLE APPS SCRIPT URL
+   ============================================================ */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbwoKohiflL0GrN8fqjZyzo-z16EA3m4Q8hqWavbc8oH1iL7W3rOQ6K1M-WLH6UiUFU8/exec";
+
+
+/* ============================================================
+   ELEMENTS
+   ============================================================ */
+
+const form =
+    document.getElementById("ownerLoginForm");
+
+const usernameInput =
+    document.getElementById("username");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const successMessage =
+    document.getElementById("successMessage");
+
+const showPasswordBtn =
+    document.getElementById("showPasswordBtn");
+
+
+/* ============================================================
+   IF ALREADY LOGGED IN AS OWNER
+   ============================================================ */
+
+if (
+    sessionStorage.getItem("a1LoggedIn") === "true" &&
+    sessionStorage.getItem("a1Role") === "owner"
+) {
+    window.location.replace("owner-dashboard.html");
+}
+
+
+/* ============================================================
+   SHOW / HIDE PASSWORD
+   ============================================================ */
+
+showPasswordBtn.addEventListener(
+    "click",
+    function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            showPasswordBtn.textContent =
+                "Hide";
+
+        } else {
+
+            passwordInput.type = "password";
+
+            showPasswordBtn.textContent =
+                "Show";
+        }
+    }
+);
+
+
+/* ============================================================
+   SHOW ERROR
+   ============================================================ */
+
+function showError(message) {
+
+    errorMessage.textContent =
+        message || "Login failed.";
+
+    errorMessage.style.display =
+        "block";
+
+    successMessage.style.display =
+        "none";
+}
+
+
+/* ============================================================
+   SHOW SUCCESS
+   ============================================================ */
+
+function showSuccess(message) {
+
+    successMessage.textContent =
+        message || "Login successful.";
+
+    successMessage.style.display =
+        "block";
+
+    errorMessage.style.display =
+        "none";
+}
+
+
+/* ============================================================
+   OWNER LOGIN
+   ============================================================ */
+
+form.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        const username =
+            usernameInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+        if (!username || !password) {
+
+            showError(
+                "Please enter username and password."
+            );
+
+            return;
+        }
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.textContent =
+            "Checking login...";
+
+        errorMessage.style.display =
+            "none";
+
+        successMessage.style.display =
+            "none";
+
+
+        try {
+
+            const url =
+                API_URL +
+                "?action=ownerLogin" +
+                "&username=" +
+                encodeURIComponent(username) +
+                "&password=" +
+                encodeURIComponent(password) +
+                "&t=" +
+                Date.now();
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server error: HTTP " +
+                    response.status
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "OWNER LOGIN RESPONSE:",
+                data
+            );
+
+
+            if (
+                !data ||
+                data.success !== true
+            ) {
+
+                throw new Error(
+                    data?.message ||
+                    "Invalid owner username or password."
+                );
+            }
+
+
+            /* ==================================================
+               CLEAR OLD LOGIN VALUES
+               ================================================== */
+
+            sessionStorage.removeItem(
+                "ownerLoggedIn"
+            );
+
+            sessionStorage.removeItem(
+                "staffLoggedIn"
+            );
+
+            sessionStorage.removeItem(
+                "a1StaffName"
+            );
+
+            sessionStorage.removeItem(
+                "a1StaffId"
+            );
+
+
+            /* ==================================================
+               SAVE OWNER LOGIN SESSION
+
+               THESE KEYS MUST MATCH
+               OWNER-DASHBOARD.HTML
+               ================================================== */
+
+            sessionStorage.setItem(
+                "a1LoggedIn",
+                "true"
+            );
+
+            sessionStorage.setItem(
+                "a1Role",
+                "owner"
+            );
+
+            sessionStorage.setItem(
+                "a1UserRole",
+                "owner"
+            );
+
+            sessionStorage.setItem(
+                "a1User",
+                data.owner?.username ||
+                username
+            );
+
+
+            /* ==================================================
+               SUCCESS
+               ================================================== */
+
+            showSuccess(
+                "Login successful. Opening owner dashboard..."
+            );
+
+
+            loginBtn.textContent =
+                "Opening Dashboard...";
+
+
+            /* ==================================================
+               OPEN OWNER DASHBOARD
+               ================================================== */
+
+            setTimeout(
+                function () {
+
+                    window.location.replace(
+                        "owner-dashboard.html"
+                    );
+
+                },
+                500
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "OWNER LOGIN ERROR:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to login."
+            );
+
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.textContent =
+                "Login to Owner Dashboard";
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

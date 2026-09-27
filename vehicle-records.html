@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>A1 Car Detailing Factory - Vehicle Records</title>
+
+    <link
+        rel="stylesheet"
+        href="vehicle-records.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="top-header">
+
+        <div class="header-left">
+
+            <button
+                class="back-btn"
+                onclick="goDashboard()"
+            >
+                ← Dashboard
+            </button>
+
+            <div>
+                <h1>A1 Car Detailing Factory</h1>
+                <p>Vehicle Records</p>
+            </div>
+
+        </div>
+
+        <button
+            class="refresh-btn"
+            onclick="loadRecords()"
+        >
+            ↻ Refresh
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main-container">
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🚗
+                </div>
+
+                <div>
+                    <span>Total Vehicles</span>
+                    <strong id="totalVehicles">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+               
+
+                <div>
+                    <span>Inside Showroom</span>
+                    <strong id="activeVehicles">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+                    <span>Completed</span>
+                    <strong id="completedVehicles">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+               
+
+                <div>
+                    <span>Total Received</span>
+                    <strong id="totalRevenue">₹0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FILTER AREA
+             ================================================= -->
+
+        <section class="filter-card">
+
+            <div class="search-box">
+
+               
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search vehicle, owner, phone or vehicle name..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="Inside">
+                    Inside Showroom
+                </option>
+
+                <option value="Completed">
+                    Completed
+                </option>
+
+            </select>
+
+
+            <select id="serviceFilter">
+
+                <option value="all">
+                    All Services
+                </option>
+
+                <option value="Full Wash">
+                    Full Wash
+                </option>
+
+                <option value="Interior Cleaning">
+                    Interior Cleaning
+                </option>
+
+                <option value="Body Wash">
+                    Body Wash
+                </option>
+                <option value="Fome Wash">
+                    Fome Wash
+                </option>
+
+                <option value="PPF">
+                    PPF
+                </option>
+
+                <option value="Maintenance">
+                    Maintenance
+                </option>
+
+                <option value="Rubbing Polish">
+                    Rubbing Polish
+                </option>
+
+                <option value="Ceramic Coating">
+                    Ceramic Coating
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <button
+                class="reset-btn"
+                onclick="resetFilters()"
+            >
+                Reset
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             RECORD HEADER
+             ================================================= -->
+
+        <div class="records-heading">
+
+            <div>
+
+                <h2>Vehicle Records</h2>
+
+                <span id="recordCount">
+                    0 records
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+             ================================================= -->
+
+        <section class="table-card">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+
+                            <th>Date</th>
+
+                            <th>Vehicle Number</th>
+
+                            <th>Owner</th>
+
+                            <th>Phone</th>
+
+                            <th>Vehicle</th>
+
+                            <th>Service</th>
+
+                            <th>Entry Time</th>
+
+                            <th>Amount</th>
+
+                            <th>Received</th>
+
+                            <th>Balance</th>
+
+                            <th>Payment</th>
+
+                            <th>Exit Time</th>
+
+                            <th>Status</th>
+
+                            <th>Remark</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recordsTable">
+
+                        <tr>
+
+                            <td
+                                colspan="16"
+                                class="empty-row"
+                            >
+                                Loading vehicle records...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+         ===================================================== -->
+
+    <div
+        id="detailsModal"
+        class="details-modal"
+    >
+
+        <div class="details-modal-box">
+
+            <div class="details-header">
+
+                <div>
+                    <h2>Vehicle Details</h2>
+                    <p>Complete vehicle information</p>
+                </div>
+
+                <button
+                    class="close-btn"
+                    onclick="closeDetails()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                id="detailsContent"
+                class="details-content"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="vehicle-records.js"></script>
+
+</body>
+
+</html>
+

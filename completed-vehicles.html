@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Vehicles - A1 Car Detailing Factory</title>
+    <link rel="stylesheet" href="completed-vehicles.css">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div>
+        <h1>A1 Car Detailing Factory</h1>
+        <p>Completed Vehicles</p>
+    </div>
+
+    <button class="back-btn" onclick="goDashboard()">
+        ← Owner Dashboard
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <!-- PAGE TITLE -->
+
+    <section class="page-title">
+
+        <div>
+            <h2>Completed Vehicles</h2>
+            <p>Vehicles that have completed their service</p>
+        </div>
+
+        <button class="refresh-btn" onclick="loadCompletedVehicles()">
+            Refresh
+        </button>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            
+
+            <div>
+                <span>Completed Vehicles</span>
+                <strong id="completedCount">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            
+
+            <div>
+                <span>Total Service Amount</span>
+                <strong id="totalAmount">₹0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          
+
+            <div>
+                <span>Total Received</span>
+                <strong id="totalPaid">₹0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          
+            <div>
+                <span>Total Balance</span>
+                <strong id="totalBalance">₹0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH AND FILTER -->
+
+    <section class="filter-section">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search vehicle, owner, phone or vehicle name..."
+            oninput="loadCompletedVehicles()"
+        >
+
+
+        <select
+            id="serviceFilter"
+            onchange="loadCompletedVehicles()"
+        >
+
+            <option value="all">All Services</option>
+            <option value="Full Body Wash">Full Body Wash</option>
+            <option value="Interior Cleaning">Interior Cleaning</option>
+            <option value="Exterior Wash">Body Wash</option>
+            <option value="Fome Wash">Fome Wash</option>
+            <option value="PPF">PPF</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Rubbing Polish">Rubbing Polish</option>
+            <option value="Detailing">Detailing</option>
+            <option value="Other">Other</option>
+
+        </select>
+
+
+        <button onclick="clearFilters()">
+            Clear
+        </button>
+
+    </section>
+
+
+    <!-- TABLE -->
+
+    <section class="table-card">
+
+        <div class="table-header">
+
+            <div>
+                <h3>Completed Vehicle Records</h3>
+                <p>Recently completed services</p>
+            </div>
+
+            <span id="vehicleCount">
+                0 vehicles
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Vehicle Number</th>
+                        <th>Owner Name</th>
+                        <th>Phone</th>
+                        <th>Vehicle Name</th>
+                        <th>Service</th>
+                        <th>Entry Time</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                        <th>Payment</th>
+                        <th>Exit Time</th>
+                        <th>Status</th>
+                        <th>Remark</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="completedVehicleTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- EMPTY MESSAGE -->
+
+        <div id="emptyMessage" class="empty-message">
+
+         
+
+            <h3>No Completed Vehicles</h3>
+
+            <p>
+                No completed vehicle records were found.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    Powered by Abu Sufiyan M ©2026
+</footer>
+
+
+<script src="completed-vehicles.js"></script>
+
+</body>
+</html>

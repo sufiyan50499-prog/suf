@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vehicle - A1 Car Detailing Factory</title>
+    <link rel="stylesheet" href="add-vehicle.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div>
+        <h1>A1 Car Detailing Factory</h1>
+        <p>Add Vehicle</p>
+    </div>
+
+    <button onclick="goDashboard()" class="back-btn">
+        ← Dashboard
+    </button>
+</header>
+
+<main class="container">
+
+    <!-- VEHICLE FORM -->
+    <section class="card">
+
+        <h2>Vehicle Entry</h2>
+
+        <form id="vehicleForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Vehicle Number *</label>
+                    <input
+                        type="text"
+                        id="vehicleNumber"
+                        placeholder="KA01AB1234"
+                        maxlength="15"
+                        autocomplete="off"
+                        required
+                    >
+                    <small>Enter vehicle number to check previous balance.</small>
+                </div>
+
+                <div class="field">
+                    <label>Owner Name *</label>
+                    <input
+                        type="text"
+                        id="ownerName"
+                        placeholder="Owner name"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Phone Number *</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="10 digit mobile number"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>Vehicle Name *</label>
+                    <input
+                        type="text"
+                        id="vehicleName"
+                        list="vehicleList"
+                        placeholder="Example: Maruti Swift"
+                        required
+                    >
+
+                    <datalist id="vehicleList">
+                        <option value="Maruti Swift">
+                        <option value="Maruti Baleno">
+                        <option value="Maruti Brezza">
+                        <option value="Hyundai Creta">
+                        <option value="Hyundai i20">
+                        <option value="Hyundai Venue">
+                        <option value="Tata Nexon">
+                        <option value="Tata Punch">
+                        <option value="Tata Harrier">
+                        <option value="Mahindra Thar">
+                        <option value="Mahindra XUV700">
+                        <option value="Toyota Innova">
+                        <option value="Toyota Fortuner">
+                        <option value="Honda City">
+                        <option value="Kia Seltos">
+                        <option value="Kia Sonet">
+                        <option value="Renault Kwid">
+                        <option value="Volkswagen Polo">
+                        <option value="Skoda Slavia">
+                        <option value="Hero">
+                        <option value="Honda Bike">
+                        <option value="Bajaj">
+                        <option value="TVS">
+                        <option value="Royal Enfield">
+                        <option value="Yamaha">
+                        <option value="Suzuki">
+                        <option value="KTM">
+                        <option value="Activa">
+                        <option value="Jupiter">
+                        <option value="Ntorq">
+                        <option value="iQube">
+                        <option value="Pleasure">
+                        <option value="Destini">
+                        <option value="Xoom">
+                        <option value="Fascino">
+                        <option value="RayZR">
+                    </datalist>
+                </div>
+
+                <div class="field">
+                    <label>Service Type *</label>
+
+                    <select id="serviceType" required>
+                        <option value="">Select Service</option>
+                        <option value="Full Body Wash">Full Body Wash</option>
+                        <option value="Interior Cleaning">Interior Cleaning</option>
+                        <option value="Body Wash ">Body Wash </option>
+                        <option value="Fome Wash ">Fome Wash </option>
+                        <option value="PPF">PPF</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Rubbing Polish">Rubbing Polish</option>
+                        <option value="Detailing">Detailing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- PREVIOUS BALANCE -->
+            <div id="balanceBox" class="balance-box hidden">
+
+                <div class="balance-header">
+                    <span> Previous Payment Pending</span>
+                </div>
+
+                <div class="balance-content">
+
+                    <div>
+                        <span>Vehicle</span>
+                        <strong id="balanceVehicle">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Owner</span>
+                        <strong id="balanceOwner">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Previous Total</span>
+                        <strong id="previousTotal">₹0</strong>
+                    </div>
+
+                    <div>
+                        <span>Previous Paid</span>
+                        <strong id="previousPaid">₹0</strong>
+                    </div>
+
+                    <div class="due">
+                        <span>Balance Due</span>
+                        <strong id="previousBalance">₹0</strong>
+                    </div>
+
+                </div>
+
+                <div class="collect-area">
+
+                    <label>Collect Previous Balance Now</label>
+
+                    <div class="collect-row">
+                        <input
+                            type="number"
+                            id="oldBalancePayment"
+                            min="0"
+                            step="1"
+                            placeholder="Enter amount"
+                        >
+
+                        <select id="oldBalanceMethod">
+                            <option value="Cash">Cash</option>
+                            <option value="PhonePe">PhonePe</option>
+                        </select>
+
+                        <button
+                            type="button"
+                            onclick="collectPreviousBalance()"
+                            class="collect-btn"
+                        >
+                            Collect
+                        </button>
+                    </div>
+
+                    <p id="collectMessage"></p>
+
+                </div>
+
+            </div>
+
+            <!-- NO AMOUNT HERE -->
+            <div class="info-box">
+                
+                <div>
+                    <strong>Payment is collected at vehicle exit</strong>
+                    <p>
+                        The amount for this new service will be entered
+                        only when the vehicle exits.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ENTRY INFORMATION -->
+            <div class="entry-info">
+
+                <div>
+                    <span>Entry Date</span>
+                    <strong id="entryDate">-</strong>
+                </div>
+
+                <div>
+                    <span>Entry Time</span>
+                    <strong id="entryTime">-</strong>
+                </div>
+
+                <div>
+                    <span>Status</span>
+                    <strong class="inside">Inside Showroom</strong>
+                </div>
+
+            </div>
+
+            <div class="buttons">
+                <button type="button" onclick="clearForm()" class="clear-btn">
+                    Clear
+                </button>
+
+                <button type="submit" class="add-btn">
+                    Add Vehicle
+                </button>
+            </div>
+
+
+        </form>
+
+    </section>
+
+</main>
+
+<script src="add-vehicle.js"></script>
+
+</body>
+</html>

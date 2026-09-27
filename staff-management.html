@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A1 - Staff Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #020617;
+            padding: 20px;
+            border-bottom: 1px solid #334155;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 25px;
+        }
+
+        .header p {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .dashboard-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+
+            padding: 12px 18px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .dashboard-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 95%;
+            max-width: 1250px;
+
+            margin: 30px auto;
+        }
+
+        /* CARD */
+
+        .card {
+            background: #1e293b;
+
+            border: 1px solid #334155;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            border: 1px solid #475569;
+
+            background: #0f172a;
+
+            color: white;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+        }
+
+        /* PERMISSION */
+
+        .permission-box {
+            margin-top: 18px;
+
+            padding: 15px;
+
+            background: #0f172a;
+
+            border: 1px solid #475569;
+
+            border-radius: 10px;
+        }
+
+        .permission-label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .permission-label input {
+            width: 20px;
+            height: 20px;
+
+            cursor: pointer;
+        }
+
+        /* BUTTONS */
+
+        button {
+            padding: 12px 18px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .create-btn {
+            background: #22c55e;
+
+            color: white;
+
+            margin-top: 18px;
+        }
+
+        .create-btn:hover {
+            background: #16a34a;
+        }
+
+        .refresh-btn {
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+
+            color: white;
+
+            margin-top: 5px;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* MESSAGE */
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 8px;
+        }
+
+        .success {
+            display: block;
+
+            background: #14532d;
+
+            color: #bbf7d0;
+        }
+
+        .error {
+            display: block;
+
+            background: #7f1d1d;
+
+            color: #fecaca;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 1100px;
+
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px;
+
+            border-bottom: 1px solid #334155;
+
+            text-align: left;
+        }
+
+        th {
+            background: #020617;
+        }
+
+        tr:hover {
+            background: #172033;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .active {
+            background: #14532d;
+
+            color: #86efac;
+        }
+
+        .disabled {
+            background: #7f1d1d;
+
+            color: #fecaca;
+        }
+
+        /* PERMISSION */
+
+        .permission-toggle {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .permission-toggle input {
+            width: 18px;
+            height: 18px;
+
+            cursor: pointer;
+        }
+
+        .permission-yes {
+            color: #86efac;
+
+            font-weight: bold;
+        }
+
+        .permission-no {
+            color: #fca5a5;
+
+            font-weight: bold;
+        }
+
+        /* ACTION */
+
+        .action-btn {
+            padding: 8px 12px;
+
+            margin-right: 5px;
+
+            margin-bottom: 5px;
+        }
+
+        .disable {
+            background: #f59e0b;
+
+            color: black;
+        }
+
+        .disable:hover {
+            background: #d97706;
+        }
+
+        .enable {
+            background: #22c55e;
+
+            color: white;
+        }
+
+        .enable:hover {
+            background: #16a34a;
+        }
+
+        .delete {
+            background: #dc2626;
+
+            color: white;
+        }
+
+        .delete:hover {
+            background: #b91c1c;
+        }
+
+        /* LOADING */
+
+        .loading {
+            text-align: center;
+
+            color: #94a3b8;
+
+            padding: 25px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 600px) {
+
+            .header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                A1 Car Detailing Factory
+            </h1>
+
+            <p>
+                Owner → Staff Management
+            </p>
+
+        </div>
+
+        <button
+            class="dashboard-btn"
+            onclick="goToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+    </div>
+
+
+    <div class="container">
+
+        <!-- CREATE STAFF -->
+
+        <div class="card">
+
+            <h2>
+                Create Staff Account
+            </h2>
+
+            <div class="form-grid">
+
+                <input
+                    id="staffName"
+                    type="text"
+                    placeholder="Staff Name">
+
+                <input
+                    id="staffPhone"
+                    type="tel"
+                    placeholder="Phone Number">
+
+                <input
+                    id="staffUsername"
+                    type="text"
+                    placeholder="Staff Username"
+                    autocomplete="off">
+
+                <input
+                    id="staffPassword"
+                    type="password"
+                    placeholder="Staff Password"
+                    autocomplete="new-password">
+
+            </div>
+
+
+            <!-- PERMISSION -->
+
+            <div class="permission-box">
+
+                <label class="permission-label">
+
+                    <input
+                        id="addVehiclePermission"
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Allow Staff to Add Vehicle
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <button
+                id="createButton"
+                class="create-btn"
+                onclick="createStaff()">
+
+                + Create Staff Account
+
+            </button>
+
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+        </div>
+
+
+        <!-- STAFF LIST -->
+
+        <div class="card">
+
+            <h2>
+                Staff Members
+            </h2>
+
+            <button
+                class="refresh-btn"
+                onclick="loadStaff()">
+
+                ↻ Refresh Staff
+
+            </button>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Username</th>
+
+                            <th>Phone</th>
+
+                            <th>Add Vehicle</th>
+
+                            <th>Status</th>
+
+                            <th>Created</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="staffTable">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="loading">
+
+                                Loading...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-btn"
+            onclick="logoutOwner()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+<script>
+
+/* ============================================================
+   GOOGLE APPS SCRIPT URL
+   ============================================================ */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwoKohiflL0GrN8fqjZyzo-z16EA3m4Q8hqWavbc8oH1iL7W3rOQ6K1M-WLH6UiUFU8/exec";
+
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+
+function goToDashboard() {
+
+    window.location.href =
+        "owner-dashboard.html";
+
+}
+
+
+/* ============================================================
+   MESSAGE
+   ============================================================ */
+
+function showMessage(message, type) {
+
+    const box =
+        document.getElementById("message");
+
+    box.textContent = message;
+
+    box.className =
+        "message " + type;
+
+    box.style.display = "block";
+
+}
+
+
+/* ============================================================
+   CREATE STAFF
+   ============================================================ */
+
+async function createStaff() {
+
+    const name =
+        document
+            .getElementById("staffName")
+            .value
+            .trim();
+
+    const phone =
+        document
+            .getElementById("staffPhone")
+            .value
+            .trim();
+
+    const username =
+        document
+            .getElementById("staffUsername")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("staffPassword")
+            .value;
+
+    const addVehicle =
+        document
+            .getElementById("addVehiclePermission")
+            .checked;
+
+
+    if (!name) {
+
+        showMessage(
+            "Please enter staff name.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!username) {
+
+        showMessage(
+            "Please enter staff username.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!password) {
+
+        showMessage(
+            "Please enter staff password.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (username.length < 3) {
+
+        showMessage(
+            "Username must contain at least 3 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (password.length < 4) {
+
+        showMessage(
+            "Password must contain at least 4 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const createButton =
+        document.getElementById("createButton");
+
+
+    createButton.disabled = true;
+
+    createButton.textContent =
+        "Creating...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+
+                        action: "createStaff",
+
+                        name: name,
+
+                        phone: phone,
+
+                        username: username,
+
+                        password: password,
+
+                        addVehicle: addVehicle
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "CREATE STAFF RESPONSE:",
+            result
+        );
+
+
+        if (!result.success) {
+
+            showMessage(
+                result.message ||
+                "Unable to create staff account.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        showMessage(
+            "Staff account created successfully. Add Vehicle: " +
+            (addVehicle ? "ON" : "OFF"),
+            "success"
+        );
+
+
+        document.getElementById(
+            "staffName"
+        ).value = "";
+
+
+        document.getElementById(
+            "staffPhone"
+        ).value = "";
+
+
+        document.getElementById(
+            "staffUsername"
+        ).value = "";
+
+
+        document.getElementById(
+            "staffPassword"
+        ).value = "";
+
+
+        document.getElementById(
+            "addVehiclePermission"
+        ).checked = true;
+
+
+        await loadStaff();
+
+    }
+    catch(error) {
+
+        console.error(
+            "CREATE STAFF ERROR:",
+            error
+        );
+
+
+        showMessage(
+            "Cannot connect to Google Apps Script.",
+            "error"
+        );
+
+    }
+    finally {
+
+        createButton.disabled = false;
+
+        createButton.textContent =
+            "+ Create Staff Account";
+
+    }
+
+}
+
+
+/* ============================================================
+   LOAD STAFF
+   ============================================================ */
+
+async function loadStaff() {
+
+    const table =
+        document.getElementById("staffTable");
+
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="8" class="loading">
+                Loading staff...
+            </td>
+        </tr>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=getStaff&t=" +
+                Date.now()
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "GET STAFF RESPONSE:",
+            result
+        );
+
+
+        if (!result.success) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="8">
+                        ${escapeHTML(
+                            result.message ||
+                            "Unable to load staff."
+                        )}
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        const staffList =
+            Array.isArray(result.staff)
+                ? result.staff
+                : [];
+
+
+        if (staffList.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="8">
+                        No staff accounts created yet.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        table.innerHTML = "";
+
+
+        staffList.forEach(function(staff) {
+
+            const row =
+                document.createElement("tr");
+
+
+            const isActive =
+                String(staff.status)
+                    .toUpperCase() === "ACTIVE";
+
+
+            const statusClass =
+                isActive
+                    ? "active"
+                    : "disabled";
+
+
+            const statusButton =
+                isActive
+
+                ? `
+                    <button
+                        class="action-btn disable"
+                        onclick="changeStatus(
+                            '${escapeJS(staff.id)}',
+                            'DISABLED'
+                        )">
+
+                        Disable
+
+                    </button>
+                `
+
+                : `
+                    <button
+                        class="action-btn enable"
+                        onclick="changeStatus(
+                            '${escapeJS(staff.id)}',
+                            'ACTIVE'
+                        )">
+
+                        Enable
+
+                    </button>
+                `;
+
+
+            const addVehicle =
+                staff.addVehicle === true ||
+
+                String(staff.addVehicle)
+                    .toUpperCase() === "YES" ||
+
+                String(staff.addVehicle)
+                    .toUpperCase() === "TRUE";
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${escapeHTML(staff.id)}
+                </td>
+
+                <td>
+                    ${escapeHTML(staff.name)}
+                </td>
+
+                <td>
+                    ${escapeHTML(staff.username)}
+                </td>
+
+                <td>
+                    ${escapeHTML(staff.phone)}
+                </td>
+
+                <td>
+
+                    <label class="permission-toggle">
+
+                        <input
+                            type="checkbox"
+                            ${addVehicle ? "checked" : ""}
+
+                            onchange="
+                                changePermission(
+                                    '${escapeJS(staff.id)}',
+                                    this.checked
+                                )
+                            ">
+
+                        <span class="${
+                            addVehicle
+                                ? "permission-yes"
+                                : "permission-no"
+                        }">
+
+                            ${addVehicle ? "YES - ON" : "NO - OFF"}
+
+                        </span>
+
+                    </label>
+
+                </td>
+
+                <td>
+
+                    <span
+                        class="status ${statusClass}">
+
+                        ${escapeHTML(
+                            String(staff.status)
+                                .toUpperCase()
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+                    ${escapeHTML(staff.createdAt)}
+                </td>
+
+                <td>
+
+                    ${statusButton}
+
+                    <button
+                        class="action-btn delete"
+                        onclick="
+                            deleteStaff(
+                                '${escapeJS(staff.id)}'
+                            )
+                        ">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "LOAD STAFF ERROR:",
+            error
+        );
+
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    Cannot connect to Google Apps Script.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   CHANGE ADD VEHICLE PERMISSION
+   ============================================================ */
+
+async function changePermission(
+    staffId,
+    allowed
+) {
+
+    const newPermission =
+        allowed ? "ON" : "OFF";
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+
+                        action:
+                            "updateStaffPermission",
+
+                        staffId:
+                            staffId,
+
+                        addVehicle:
+                            allowed
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "PERMISSION RESPONSE:",
+            result
+        );
+
+
+        if (!result.success) {
+
+            alert(
+                result.message ||
+                "Unable to update Add Vehicle permission."
+            );
+
+            await loadStaff();
+
+            return;
+        }
+
+
+        alert(
+            "Add Vehicle permission is now " +
+            newPermission
+        );
+
+
+        await loadStaff();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "PERMISSION ERROR:",
+            error
+        );
+
+
+        alert(
+            "Unable to update Add Vehicle permission."
+        );
+
+
+        await loadStaff();
+
+    }
+
+}
+
+
+/* ============================================================
+   CHANGE STATUS
+   ============================================================ */
+
+async function changeStatus(
+    staffId,
+    status
+) {
+
+    const question =
+        status === "ACTIVE"
+
+            ? "Enable this staff account?"
+
+            : "Disable this staff account?";
+
+
+    if (!confirm(question)) {
+
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+
+                        action:
+                            "updateStaffStatus",
+
+                        staffId:
+                            staffId,
+
+                        status:
+                            status
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "STATUS RESPONSE:",
+            result
+        );
+
+
+        if (!result.success) {
+
+            alert(
+                result.message ||
+                "Unable to change staff status."
+            );
+
+            await loadStaff();
+
+            return;
+        }
+
+
+        alert(
+            result.message ||
+            "Staff status updated successfully."
+        );
+
+
+        await loadStaff();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "STATUS ERROR:",
+            error
+        );
+
+
+        alert(
+            "Cannot connect to Google Sheets."
+        );
+
+
+        await loadStaff();
+
+    }
+
+}
+
+
+/* ============================================================
+   DELETE STAFF
+   ============================================================ */
+
+async function deleteStaff(staffId) {
+
+    if (
+        !confirm(
+            "Permanently delete this staff account?"
+        )
+    ) {
+
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+
+                        action:
+                            "deleteStaff",
+
+                        staffId:
+                            staffId
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "DELETE RESPONSE:",
+            result
+        );
+
+
+        if (!result.success) {
+
+            alert(
+                result.message ||
+                "Unable to delete staff."
+            );
+
+            return;
+        }
+
+
+        alert(
+            "Staff account deleted successfully."
+        );
+
+
+        await loadStaff();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
+
+        alert(
+            "Cannot connect to Google Sheets."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   HTML ESCAPE
+   ============================================================ */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ============================================================
+   JAVASCRIPT ESCAPE
+   ============================================================ */
+
+function escapeJS(value) {
+
+    return String(value ?? "")
+
+        .replaceAll("\\", "\\\\")
+
+        .replaceAll("'", "\\'")
+
+        .replaceAll("\n", "\\n")
+
+        .replaceAll("\r", "\\r");
+
+}
+
+
+/* ============================================================
+   OWNER LOGOUT
+   ============================================================ */
+
+function logoutOwner() {
+
+    localStorage.removeItem(
+        "ownerLoggedIn"
+    );
+
+    sessionStorage.clear();
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* ============================================================
+   START
+   ============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadStaff();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

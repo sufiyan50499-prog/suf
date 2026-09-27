@@ -1,0 +1,522 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.top-header {
+    background: #020617;
+    color: white;
+
+    padding: 20px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.top-header p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.back-btn {
+    border: none;
+    background: #334155;
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #475569;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    width: 95%;
+    max-width: 1700px;
+
+    margin: 25px auto;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.page-title h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.page-title p {
+    color: #64748b;
+}
+
+.refresh-btn {
+    border: none;
+
+    background: #2563eb;
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filter-card {
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.filter-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #475569;
+}
+
+.filter-group input,
+.filter-group select {
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    padding: 11px;
+
+    min-width: 170px;
+
+    outline: none;
+
+    background: white;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: #2563eb;
+}
+
+.today-btn,
+.clear-btn {
+    border: none;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.today-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.clear-btn {
+    background: #64748b;
+    color: white;
+}
+
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+
+    background: #e2e8f0;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 23px;
+}
+
+.stat-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.stat-card strong {
+    display: block;
+
+    font-size: 21px;
+}
+
+
+/* =====================================================
+   PAYMENT CARDS
+===================================================== */
+
+.payment-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+.payment-card {
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.payment-title {
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.payment-card strong {
+    display: block;
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+.payment-card span {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-card {
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.table-header {
+    padding: 18px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-header h3 {
+    font-size: 18px;
+
+    margin-bottom: 4px;
+}
+
+.table-header p {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.table-header span {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 1250px;
+}
+
+thead {
+    background: #0f172a;
+
+    color: white;
+}
+
+th,
+td {
+    padding: 13px 12px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+th {
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+.received {
+    color: #16a34a;
+
+    font-weight: bold;
+}
+
+.balance-positive {
+    color: #dc2626;
+
+    font-weight: bold;
+}
+
+.balance-zero {
+    color: #16a34a;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+.cash {
+    color: #166534;
+
+    font-weight: bold;
+}
+
+.phonepe {
+    color: #2563eb;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty-message {
+    display: none;
+
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+.empty-message div {
+    font-size: 50px;
+
+    margin-bottom: 10px;
+}
+
+.empty-message h3 {
+    margin-bottom: 8px;
+}
+
+.empty-message p {
+    color: #64748b;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .top-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        padding: 15px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .page-title {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .filter-card {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .filter-group input,
+    .filter-group select {
+        width: 100%;
+    }
+
+    .today-btn,
+    .clear-btn {
+        width: 100%;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

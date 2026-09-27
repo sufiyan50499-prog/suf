@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports - A1 Car Detailing Factory</title>
+
+    <link rel="stylesheet" href="reports.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-header">
+
+        <div>
+            <h1>A1 Car Detailing Factory</h1>
+            <p>Daily / Monthly Reports</p>
+        </div>
+
+        <div class="header-actions">
+            <button onclick="goDashboard()" class="dashboard-btn">
+                ← Dashboard
+            </button>
+
+            <button onclick="logout()" class="logout-btn">
+                Logout
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <!-- REPORT CONTROLS -->
+
+        <section class="report-controls">
+
+            <div class="control-group">
+
+                <label for="reportType">
+                    Report Type
+                </label>
+
+                <select id="reportType" onchange="changeReportType()">
+                    <option value="daily">Daily Report</option>
+                    <option value="monthly">Monthly Report</option>
+                    <option value="custom">Custom Report</option>
+                </select>
+
+            </div>
+
+
+            <div class="control-group" id="dailyGroup">
+
+                <label for="reportDate">
+                    Select Date
+                </label>
+
+                <input
+                    type="date"
+                    id="reportDate"
+                    onchange="generateReport()"
+                >
+
+            </div>
+
+
+            <div class="control-group hidden" id="monthlyGroup">
+
+                <label for="reportMonth">
+                    Select Month
+                </label>
+
+                <input
+                    type="month"
+                    id="reportMonth"
+                    onchange="generateReport()"
+                >
+
+            </div>
+
+
+            <div class="control-group hidden" id="customFromGroup">
+
+                <label for="fromDate">
+                    From Date
+                </label>
+
+                <input
+                    type="date"
+                    id="fromDate"
+                    onchange="generateReport()"
+                >
+
+            </div>
+
+
+            <div class="control-group hidden" id="customToGroup">
+
+                <label for="toDate">
+                    To Date
+                </label>
+
+                <input
+                    type="date"
+                    id="toDate"
+                    onchange="generateReport()"
+                >
+
+            </div>
+
+
+            <div class="control-buttons">
+
+                <button onclick="generateReport()" class="generate-btn">
+                    Generate Report
+                </button>
+
+                <button onclick="printReport()" class="print-btn">
+                    Print
+                </button>
+
+                <button onclick="exportCSV()" class="export-btn">
+                    Export CSV
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPORT TITLE -->
+
+        <section class="report-heading">
+
+            <div>
+
+                <h2 id="reportTitle">
+                    Daily Report
+                </h2>
+
+                <p id="reportPeriod">
+                    -
+                </p>
+
+            </div>
+
+            <div class="generated-time">
+                Generated:
+                <span id="generatedTime">-</span>
+            </div>
+
+        </section>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+               
+
+                <div>
+                    <span>Total Vehicles</span>
+                    <strong id="totalVehicles">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+                    <span>Completed</span>
+                    <strong id="completedVehicles">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                
+
+                <div>
+                    <span>Active / Inside</span>
+                    <strong id="activeVehicles">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div>
+                    <span>Service Amount</span>
+                    <strong id="serviceAmount">
+                        ₹0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              
+
+                <div>
+                    <span>Amount Received</span>
+                    <strong id="receivedAmount">
+                        ₹0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+
+                <div>
+                    <span>Pending Balance</span>
+                    <strong id="pendingAmount">
+                        ₹0
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PAYMENT SUMMARY ================= -->
+
+        <section class="payment-section">
+
+            <h2>Payment Summary</h2>
+
+            <div class="payment-grid">
+
+                <div class="payment-card cash">
+
+                    
+
+                    <div>
+
+                        <span>CASH</span>
+
+                        <strong id="cashAmount">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="payment-card phonepe">
+
+                    
+
+                    <div>
+
+                        <span>PHONEPE</span>
+
+                        <strong id="phonePeAmount">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="payment-card total">
+
+
+                    <div>
+
+                        <span>TOTAL RECEIVED</span>
+
+                        <strong id="totalReceived">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SERVICE SUMMARY ================= -->
+
+        <section class="table-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Service-wise Report</h2>
+
+                    <p>
+                        Services completed during the selected period
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+                            <th>Service</th>
+                            <th>Vehicles</th>
+                            <th>Service Amount</th>
+                            <th>Received</th>
+                            <th>Balance</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="serviceTable">
+
+                        <tr>
+
+                            <td colspan="6" class="empty">
+                                No service data available
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= VEHICLE REPORT ================= -->
+
+        <section class="table-section report-table">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Vehicle Report</h2>
+
+                    <p>
+                        Vehicle records for the selected period
+                    </p>
+
+                </div>
+
+                <span id="recordCount">
+                    0 Records
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="vehicleReportTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+                            <th>Date</th>
+                            <th>Vehicle Number</th>
+                            <th>Owner Name</th>
+                            <th>Phone</th>
+                            <th>Vehicle</th>
+                            <th>Service</th>
+                            <th>Entry Time</th>
+                            <th>Exit Time</th>
+                            <th>Amount</th>
+                            <th>Received</th>
+                            <th>Balance</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="vehicleTable">
+
+                        <tr>
+
+                            <td colspan="14" class="empty">
+                                No records available
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <p>
+                Powered by Abu Sufiyan M ©2026
+            </p>
+
+            <p>
+                A1 Car Detailing Factory
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="reports.js"></script>
+
+</body>
+</html>

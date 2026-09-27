@@ -1,0 +1,963 @@
+
+/* =========================================================
+   A1 CAR DETAILING FACTORY
+   VEHICLE RECORDS
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f1f5f9;
+
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.top-header {
+    min-height: 78px;
+
+    background: #020617;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 14px 24px;
+
+    gap: 20px;
+}
+
+.header-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.header-left h1 {
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+.header-left p {
+    margin: 4px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.back-btn,
+.refresh-btn {
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    padding: 10px 15px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+}
+
+.back-btn {
+    background: #1e293b;
+
+    color: white;
+}
+
+.back-btn:hover {
+    background: #334155;
+}
+
+.refresh-btn {
+    background: #2563eb;
+
+    color: white;
+}
+
+.refresh-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main-container {
+    max-width: 1700px;
+
+    margin: auto;
+
+    padding: 25px;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 3px 10px
+        rgba(15, 23, 42, 0.05);
+}
+
+.stat-icon {
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+.stat-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.stat-card strong {
+    display: block;
+
+    font-size: 22px;
+
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.filter-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(15, 23, 42, 0.05);
+}
+
+.search-box {
+    flex: 1;
+
+    min-width: 250px;
+
+    height: 43px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 12px;
+
+    gap: 8px;
+}
+
+.search-box span {
+    font-size: 16px;
+}
+
+.search-box input {
+    border: none;
+
+    outline: none;
+
+    width: 100%;
+
+    font-size: 14px;
+
+    background: transparent;
+}
+
+.filter-card select {
+    height: 43px;
+
+    min-width: 170px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #334155;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+.filter-card select:focus,
+.search-box:focus-within {
+    border-color: #2563eb;
+}
+
+.reset-btn {
+    height: 43px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   RECORD HEADING
+   ========================================================= */
+
+.records-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.records-heading h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.records-heading span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-card {
+    background: white;
+
+    border-radius: 14px;
+
+    border: 1px solid #e2e8f0;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 3px 10px
+        rgba(15, 23, 42, 0.05);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    min-width: 1500px;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+thead {
+    background: #0f172a;
+
+    color: white;
+}
+
+th {
+    padding: 14px 12px;
+
+    text-align: left;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    white-space: nowrap;
+
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+.empty-row {
+    text-align: center;
+
+    padding: 45px !important;
+
+    color: #64748b;
+}
+
+.vehicle-number {
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+.free-service {
+    display: inline-block;
+
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: #16a34a;
+
+    background: #dcfce7;
+
+    padding: 2px 6px;
+
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   BALANCE
+   ========================================================= */
+
+.balance-due {
+    color: #dc2626;
+
+    background: #fee2e2;
+
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    font-weight: 700;
+}
+
+.balance-clear {
+    color: #16a34a;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+
+.payment-cash {
+    color: #15803d;
+
+    font-weight: 700;
+}
+
+.payment-phonepe {
+    color: #7c3aed;
+
+    font-weight: 700;
+}
+
+.payment-pending {
+    color: #d97706;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status-completed {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+.status-inside {
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+   ========================================================= */
+
+.edit-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+.edit-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   DETAILS MODAL
+   ========================================================= */
+
+.details-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(2, 6, 23, 0.68);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9000;
+
+    padding: 20px;
+}
+
+.details-modal.show {
+    display: flex;
+}
+
+.details-modal-box {
+    width: min(850px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.3);
+}
+
+.details-header {
+    padding: 20px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.details-header h2 {
+    margin: 0;
+
+    font-size: 21px;
+}
+
+.details-header p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.close-btn {
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    color: #64748b;
+
+    cursor: pointer;
+}
+
+.details-content {
+    padding: 24px;
+}
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.detail-item {
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 13px;
+}
+
+.detail-item label {
+    display: block;
+
+    font-size: 12px;
+
+    color: #64748b;
+
+    margin-bottom: 6px;
+}
+
+.detail-item strong {
+    display: block;
+
+    color: #0f172a;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   EDIT MODAL
+   ========================================================= */
+
+.edit-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(2, 6, 23, 0.68);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 10000;
+
+    padding: 20px;
+}
+
+.edit-modal.show {
+    display: flex;
+}
+
+.edit-modal-box {
+    width: min(850px, 100%);
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.35);
+}
+
+.edit-modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.edit-modal-header h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #111827;
+}
+
+.edit-modal-header p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.edit-close-btn {
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    color: #64748b;
+}
+
+.edit-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+
+    padding: 22px 24px 0;
+}
+
+.edit-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.edit-field label {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.edit-field input,
+.edit-field select,
+.edit-field textarea {
+    width: 100%;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    padding: 11px 12px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    background: white;
+
+    color: #111827;
+}
+
+.edit-field input:focus,
+.edit-field select:focus,
+.edit-field textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(37, 99, 235, 0.1);
+}
+
+.edit-full {
+    padding: 16px 24px 0;
+}
+
+.edit-balance-preview {
+    margin: 18px 24px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+
+    font-weight: 700;
+
+    color: #0f172a;
+}
+
+.edit-modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 20px 24px;
+
+    border-top: 1px solid #e2e8f0;
+
+    margin-top: 20px;
+}
+
+.edit-cancel-btn,
+.edit-save-btn {
+    border: none;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.edit-cancel-btn {
+    background: #e2e8f0;
+
+    color: #334155;
+}
+
+.edit-save-btn {
+    background: #16a34a;
+
+    color: white;
+}
+
+.edit-save-btn:hover {
+    background: #15803d;
+}
+
+.edit-save-btn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .filter-card {
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        flex-basis: 100%;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .top-header {
+        padding: 12px 15px;
+
+        align-items: flex-start;
+    }
+
+    .header-left {
+        gap: 10px;
+    }
+
+    .header-left h1 {
+        font-size: 17px;
+    }
+
+    .back-btn {
+        font-size: 12px;
+
+        padding: 8px 10px;
+    }
+
+    .refresh-btn {
+        font-size: 12px;
+
+        padding: 8px 10px;
+    }
+
+    .main-container {
+        padding: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-card {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .search-box,
+    .filter-card select,
+    .reset-btn {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-modal {
+        padding: 10px;
+    }
+
+    .edit-modal-box {
+        max-height: 95vh;
+    }
+
+}
+

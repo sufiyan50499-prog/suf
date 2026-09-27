@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Vehicles - A1 Car Detailing Factory</title>
+    <link rel="stylesheet" href="active-vehicles.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div>
+            <h1>A1 Car Detailing Factory</h1>
+            <p>Active / Washing Vehicles</p>
+        </div>
+
+        <button class="back-btn" onclick="goDashboard()">
+            ← Owner Dashboard
+        </button>
+    </header>
+
+    <main class="container">
+
+        <!-- PAGE TITLE -->
+        <section class="page-title">
+            <div>
+                <h2>Active Vehicles</h2>
+                <p>Vehicles currently inside the showroom</p>
+            </div>
+
+            <button class="refresh-btn" onclick="loadActiveVehicles()">
+                 Refresh
+            </button>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                
+                <div>
+                    <span>Active Vehicles</span>
+                    <strong id="activeCount">0</strong>
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- SEARCH -->
+        <section class="search-section">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search vehicle, owner, phone or vehicle name..."
+                oninput="loadActiveVehicles()"
+            >
+
+            <button onclick="clearSearch()">Clear</button>
+
+        </section>
+
+        <!-- VEHICLE TABLE -->
+        <section class="table-card">
+
+            <div class="table-header">
+                <h3>Vehicles Inside Showroom</h3>
+                <span id="vehicleCount">0 vehicles</span>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Date</th>
+                            <th>Vehicle Number</th>
+                            <th>Owner Name</th>
+                            <th>Phone</th>
+                            <th>Vehicle Name</th>
+                            <th>Service</th>
+                            <th>Entry Time</th>
+                            <th>Amount</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="activeVehicleTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="emptyMessage" class="empty-message">
+                
+                <h3>No Active Vehicles</h3>
+                <p>There are currently no vehicles inside the showroom.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- EXIT MODAL -->
+    <div id="exitModal" class="modal">
+
+        <div class="modal-box">
+
+            <button class="close-btn" onclick="closeExitModal()">×</button>
+
+            <h2>Complete Vehicle Exit</h2>
+            <p class="modal-subtitle">
+                Enter the final payment details
+            </p>
+
+            <div class="vehicle-info">
+                <div>
+                    <span>Vehicle Number</span>
+                    <strong id="exitVehicleNumber">-</strong>
+                </div>
+
+                <div>
+                    <span>Owner</span>
+                    <strong id="exitOwnerName">-</strong>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Total Service Amount</label>
+
+                <input
+                    type="number"
+                    id="exitAmount"
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter service amount"
+                    oninput="calculateBalance()"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Amount Received</label>
+
+                <input
+                    type="number"
+                    id="exitPaidAmount"
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter amount received"
+                    oninput="calculateBalance()"
+                >
+            </div>
+
+            <div class="form-group">
+
+                <label>Payment Method</label>
+
+                <select id="exitPaymentMethod">
+
+                    <option value="">Select Payment Method</option>
+                    <option value="CASH">CASH</option>
+                    <option value="PHONEPE">PHONEPE</option>
+
+                </select>
+
+            </div>
+
+            <div class="balance-box">
+
+                <span>Balance</span>
+
+                <strong id="exitBalance">
+                    ₹0
+                </strong>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Remark</label>
+
+                <textarea
+                    id="exitRemark"
+                    rows="3"
+                    placeholder="Enter remark"
+                ></textarea>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    class="cancel-btn"
+                    onclick="closeExitModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="complete-btn"
+                    onclick="completeExit()"
+                >
+                    ✓ Complete Exit
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        Powered by Abu Sufiyan M ©2026
+    </footer>
+
+    <script src="active-vehicles.js"></script>
+
+</body>
+</html>

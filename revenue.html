@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue - A1 Car Detailing Factory</title>
+    <link rel="stylesheet" href="revenue.css">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div>
+        <h1>A1 Car Detailing Factory</h1>
+        <p>Revenue Management</p>
+    </div>
+
+    <button class="back-btn" onclick="goDashboard()">
+        ← Owner Dashboard
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <section class="page-title">
+
+        <div>
+            <h2>Revenue</h2>
+            <p>Track service revenue and payments</p>
+        </div>
+
+        <button class="refresh-btn" onclick="loadRevenue()">
+            Refresh
+        </button>
+
+    </section>
+
+
+    <!-- DATE FILTER -->
+
+    <section class="filter-card">
+
+        <div class="filter-group">
+
+            <label>From Date</label>
+
+            <input
+                type="date"
+                id="fromDate"
+                onchange="loadRevenue()"
+            >
+
+        </div>
+
+
+        <div class="filter-group">
+
+            <label>To Date</label>
+
+            <input
+                type="date"
+                id="toDate"
+                onchange="loadRevenue()"
+            >
+
+        </div>
+
+
+        <div class="filter-group">
+
+            <label>Payment Method</label>
+
+            <select
+                id="paymentFilter"
+                onchange="loadRevenue()"
+            >
+
+                <option value="all">All Payments</option>
+                <option value="CASH">CASH</option>
+                <option value="PHONEPE">PHONEPE</option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="today-btn"
+            onclick="setToday()"
+        >
+            Today
+        </button>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearFilters()"
+        >
+            Clear
+        </button>
+
+    </section>
+
+
+    <!-- REVENUE CARDS -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🚗
+            </div>
+
+            <div>
+                <span>Completed Vehicles</span>
+                <strong id="completedVehicles">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            
+
+            <div>
+                <span>Total Service Amount</span>
+                <strong id="totalServiceAmount">₹0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            
+
+            <div>
+                <span>Total Received</span>
+                <strong id="totalReceived">₹0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+           
+            <div>
+                <span>Total Balance</span>
+                <strong id="totalBalance">₹0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAYMENT SUMMARY -->
+
+    <section class="payment-grid">
+
+        <div class="payment-card">
+
+            <div class="payment-title">
+                CASH
+            </div>
+
+            <strong id="cashAmount">
+                ₹0
+            </strong>
+
+            <span>
+                Cash Received
+            </span>
+
+        </div>
+
+
+        <div class="payment-card">
+
+            <div class="payment-title">
+                PHONEPE
+            </div>
+
+            <strong id="phonePeAmount">
+                ₹0
+            </strong>
+
+            <span>
+                PhonePe Received
+            </span>
+
+        </div>
+
+
+        <div class="payment-card">
+
+            <div class="payment-title">
+                TOTAL
+            </div>
+
+            <strong id="paymentTotal">
+                ₹0
+            </strong>
+
+            <span>
+                Total Received
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- REVENUE TABLE -->
+
+    <section class="table-card">
+
+        <div class="table-header">
+
+            <div>
+                <h3>Revenue Records</h3>
+                <p>Completed vehicle payments</p>
+            </div>
+
+            <span id="recordCount">
+                0 records
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Vehicle Number</th>
+                        <th>Owner Name</th>
+                        <th>Service</th>
+                        <th>Service Amount</th>
+                        <th>Amount Received</th>
+                        <th>Balance</th>
+                        <th>Payment</th>
+                        <th>Exit Time</th>
+                        <th>Remark</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="revenueTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="emptyMessage"
+            class="empty-message"
+        >
+
+            <div>💰</div>
+
+            <h3>No Revenue Records</h3>
+
+            <p>
+                No completed payment records were found
+                for the selected period.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    Powered by Abu Sufiyan M ©2026
+</footer>
+
+
+<script src="revenue.js"></script>
+
+</body>
+</html>
